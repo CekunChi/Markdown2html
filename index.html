@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 转富文本 | 一键复制到公众号</title>
+    <meta name="description" content="将 Markdown 转换为适合微信公众号的富文本格式，支持一键复制、多主题切换">
+
+    <!-- marked.js - Markdown 解析 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- highlight.js - 代码高亮 -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- 顶部工具栏 -->
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="logo">
+                    <span class="logo-icon">📝</span>
+                    <span class="logo-text">MD2Rich</span>
+                </h1>
+            </div>
+
+            <div class="toolbar-center">
+                <!-- 主题切换 -->
+                <div class="theme-switcher">
+                    <button class="theme-btn active" data-theme="default" title="默认主题">
+                        <span class="theme-icon">☀️</span>
+                        <span class="theme-label">默认</span>
+                    </button>
+                    <button class="theme-btn" data-theme="dark" title="深色主题">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-label">深色</span>
+                    </button>
+                    <button class="theme-btn" data-theme="fresh" title="清新主题">
+                        <span class="theme-icon">🌿</span>
+                        <span class="theme-label">清新</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="toolbar-right">
+                <!-- 清除按钮 -->
+                <button class="clear-btn" id="clearBtn" title="清除内容">
+                    <span class="btn-icon">🗑️</span>
+                    <span class="btn-text">清除</span>
+                </button>
+
+                <!-- 图片上传 -->
+                <label class="upload-btn" title="上传图片">
+                    <input type="file" id="imageUpload" accept="image/*" multiple hidden>
+                    <span class="btn-icon">🖼️</span>
+                    <span class="btn-text">上传图片</span>
+                </label>
+
+                <!-- 复制按钮 -->
+                <button class="copy-btn" id="copyBtn" title="复制富文本">
+                    <span class="btn-icon">📋</span>
+                    <span class="btn-text">一键复制</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 编辑区 -->
+            <section class="editor-section">
+                <div class="section-header">
+                    <span class="section-title">📝 Markdown 编辑</span>
+                    <span class="char-count" id="charCount">0 字</span>
+                </div>
+                <textarea class="editor" id="markdownInput" placeholder="在此输入 Markdown 内容...
+
+# 标题示例
+
+这是一段**加粗**和*斜体*文本。
+
+## 代码示例
+
+```python
+print('Hello, World!')
+```
+
+> 引用文本示例
+
+- 列表项 1
+- 列表项 2
+"></textarea>
+            </section>
+
+            <!-- 预览区 -->
+            <section class="preview-section">
+                <div class="section-header">
+                    <span class="section-title">👀 富文本预览</span>
+                    <span class="preview-hint">预览效果与公众号一致</span>
+                </div>
+                <div class="preview-container">
+                    <article class="preview-content wechat-style" id="previewContent">
+                        <p class="empty-hint">在左侧输入 Markdown，这里会实时显示预览...</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- 图片管理面板 -->
+        <div class="image-panel" id="imagePanel">
+            <div class="panel-header">
+                <span class="panel-title">🖼️ 已上传图片</span>
+                <button class="panel-close" id="closePanelBtn">✕</button>
+            </div>
+            <div class="image-list" id="imageList">
+                <p class="empty-hint">暂无上传图片，点击上方按钮上传</p>
+            </div>
+        </div>
+
+        <!-- 提示消息 -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
