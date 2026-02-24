@@ -2,7 +2,7 @@
     "name": "MD2Rich - Markdown转富文本",
     "short_name": "MD2Rich",
     "description": "将Markdown转换为可复制的富文本格式，一键粘贴到微信公众号",
-    "start_url": "./index.html",
+    "start_url": "./markdown2html.html",
     "display": "standalone",
     "background_color": "#f8fafc",
     "theme_color": "#3b82f6",

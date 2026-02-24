@@ -5,7 +5,7 @@
 const CACHE_NAME = 'md2rich-v1';
 const ASSETS_TO_CACHE = [
     './',
-    './index.html',
+    './markdown2html.html',
     './index.css',
     './index.js',
     './manifest.json',
